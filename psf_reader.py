@@ -286,6 +286,11 @@ def main():
 	quarter_plot(content,year,month,day,"t_eff")
 	plot_filters_time(content,year,month,day,"t_eff")
 	plot_filters_time(content,year,month,day,"psf")
+	for line in sys.argv:
+		if line=="--show-plots=True":
+			plt.show(block=False)
+			os.system('sleep 20')
+
 if __name__ == '__main__':
 	with warnings.catch_warnings():
 		warnings.simplefilter("ignore", category=RuntimeWarning)
