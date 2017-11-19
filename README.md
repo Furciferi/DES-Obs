@@ -11,7 +11,7 @@ Table of Contents:
    * [TL;DR](#tldr)
    * [Installation](#installation)
    * [Usage](#usage)
-   * [HUAP Method](#desenapt-method)
+   * [HUAP Method](#HUAP-method)
    * [Dependencies](#dependencies)
 
 
@@ -19,7 +19,7 @@ TL;DR
 =====
 
 * Step 1 : Use the command qcInvPrint in the godb window on the Observer2 console in kentools.
-* Step 2 : Open a new terminal and type "python DESENAPT.py"
+* Step 2 : Open a new terminal and type "python HUAP.py"
 * Step 3 : Read the terminal output to obtain the seeing summary, and view plots.
 
 Installation
@@ -37,7 +37,7 @@ To run the program:
 
 * Open a new Terminal
 * Navigate to the directory "DECamObserver"
-* Run python DESENAPT.py in the command line.
+* Run python HUAP.py in the command line.
 
 If you would like to know the optional arguments that can be parsed you can use the help option "-h, --help".
 
@@ -49,7 +49,7 @@ Current arguments are:
 
 If you run HUAP with 20171119.qcinv file in the same directory, you should be able to reproduce the figures included in the repository. Remember that you should rename the plot files or the will be overwritten.
 
-DESENAPT Method
+HUAP Method
 ===============
 The program itself is currently limited to producting psf and t_eff plots against time. The information is read in from qcInvPrint file.
 
