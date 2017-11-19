@@ -47,7 +47,7 @@ Current arguments are:
 * --show-plots : A boolean argument that can be parsed to show the two summary plots for psf and t_eff. Default is "False".
 
 
-If you would like to explore DESENAPT
+If you run DESNEPT with 20171119.qcinv file in the same directory, you should be able to reproduce the figures included in the repository. Remember that you should rename the plot files or the will be overwritten.
 
 DESENAPT Method
 ===============
