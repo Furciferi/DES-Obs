@@ -105,7 +105,7 @@ def plot_filters_time(content,year,month,day,var):
 	headers = ["ra","dec","ut","filter","exposure_time","secz","psf","sky","cloud","t_eff"]
 	filters = ['g','r','i','z','Y']
 	colours = ['g','r','m','pink','y']
-	linestyles = ["-","--","-.",":",(1,(10,2))]
+	linestyles = ["-","--","-.",":","-"]
 	fig,ax = plt.subplots()
 	xmin=999999999
 	xmax=0
@@ -159,7 +159,7 @@ def quarter_plot(content,year,month,day,var):
 	headers = ["ra","dec","ut","filter","exposure_time","secz","psf","sky","cloud","t_eff"]
 	filters = ['g','r','i','z','Y']
 	colours = ['g','r','m','pink','y']
-	linestyles = ["-","--","-.",":",(1,(10,2))]
+	linestyles = ["-","--","-.",":",'-']
 	all_times=[]
 	for item in exp.keys():
 		try:
@@ -276,7 +276,7 @@ def get_rms_iband(_list):
 def main():
 	year,month,day = get_date()
 	try:
-		with open("{}{}{}.qcinv".format(year,month,day-1)) as f:
+		with open("{}{}{}.qcinv".format(year,month,day)) as f:
 			content = f.readlines()
 	except IOError:
 		print "No file found for today, please run qcInvPrint as observer2 in godb."
