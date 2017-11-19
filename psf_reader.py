@@ -276,7 +276,7 @@ def get_rms_iband(_list):
 def main():
 	year,month,day = get_date()
 	try:
-		with open("{}{}{}.qcinv".format(year,month,day)) as f:
+		with open("{}{}{}.qcinv".format(year,month,day-1)) as f:
 			content = f.readlines()
 	except IOError:
 		print "No file found for today, please run qcInvPrint as observer2 in godb."
