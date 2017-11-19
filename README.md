@@ -11,7 +11,7 @@ Table of Contents:
    * [TL;DR](#tldr)
    * [Installation](#installation)
    * [Usage](#usage)
-   * [DESNEPT Method](#desenapt-method)
+   * [DESNEPT Method](#desnept-method)
    * [Dependencies](#dependencies)
 
 
