@@ -287,8 +287,8 @@ def main():
 	year,month,day = get_date()
 	day-=1
 	for line in sys.argv:
-		if line.split("=")[0]=="--day=":
-			day=line.split("=")[1]
+		if line.split("=")[0]=="--day":
+			day=int(line.split("=")[1])
 	try:
 		with open("{}{}{}.qcinv".format(year,month,day)) as f:
 			content = f.readlines()
