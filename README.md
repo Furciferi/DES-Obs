@@ -29,7 +29,7 @@ This file should already be in the DECamObserver directory, if not view the Raw 
 Usage
 ======
 
-HUAP is used in conjuction with the kentools command qcInvPrint. This grabs the observation data for the night and saves into the DECamObserver directory a "YYYYMMDD".qcinv file. The day seems to be given by when you run the code, so in general will be +1 to the actual observing night.
+HUAP is used in conjuction with the kentools command qcInvPrint. This grabs the observation data for the night and saves into the DECamObserver directory a "YYYYMMDD".qcinv file. 
 
 As this is dependent on kentools and qcInvPrint, in general you will need to be at the Observer2 station.
 
