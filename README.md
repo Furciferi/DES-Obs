@@ -11,7 +11,7 @@ Table of Contents:
    * [TL;DR](#tldr)
    * [Installation](#installation)
    * [Usage](#usage)
-   * [DESENAPT Method](#desenapt-method)
+   * [DESNEPT Method](#desenapt-method)
    * [Dependencies](#dependencies)
 
 
@@ -49,7 +49,7 @@ Current arguments are:
 
 If you run DESNEPT with 20171119.qcinv file in the same directory, you should be able to reproduce the figures included in the repository. Remember that you should rename the plot files or the will be overwritten.
 
-DESENAPT Method
+DESNEPT Method
 ===============
 The program itself is currently limited to producting psf and t_eff plots against time. The information is read in from qcInvPrint file.
 
