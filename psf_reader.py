@@ -282,12 +282,8 @@ def get_rms_iband(_list):
 	for element in _list:
 		_sum+=((av - element)**2.)/n
 	return str(np.sqrt(_sum))
-def arguments():
-	parser=argparse.ArgumentParser()
-	parser.add
+
 def main():
-	parser=argparse.ArgumentParser()
-	args = parser.parse.args
 	year,month,day = get_date()
 	day-=1
 	for line in sys.argv:
