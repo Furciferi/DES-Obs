@@ -1,11 +1,11 @@
-DESENAPT
+DESNEPT
 =======
-The Dark Energy Survey End of Night Plotting Tool is an easy to use plotting tool to both create a summary of seeing throughout the Night, and visual plots for your enjoyment. This tool should already be in the DECamObserver directory.
+The Dark Energy Survey Night End Plotting Tool is an easy to use plotting tool to both create a summary of seeing throughout the Night, and visual plots for your enjoyment. This tool should already be in the DECamObserver directory.
 
 
 Table of Contents:
 ==================
-	*[DESENAPT](#DESENAPT)
+	*[DESNEPT](#DESNEPT)
 	*[Table of Contents](#table-of-contents)
 	*[TL:DR](#tldr)
 	*[Installation](#installation)
@@ -22,12 +22,12 @@ TL;DR
 
 Installation
 =============
-This file should already be in the DECamObserver directory, if not view the Raw image of DESENAPT.py and right click and save as. 
+This file should already be in the DECamObserver directory, if not view the Raw image of DESNEPT.py and right click and save as. 
 
 Usage
 ======
 
-DESENAPT is used in conjuction with the kentools command qcInvPrint. This grabs the observation data for the night and saves into the DECamObserver directory a "YYYYMMDD".qcinv file. The day seems to be given by when you run the code, so in general will be +1 to the actual observing night.
+DESNEPT is used in conjuction with the kentools command qcInvPrint. This grabs the observation data for the night and saves into the DECamObserver directory a "YYYYMMDD".qcinv file. The day seems to be given by when you run the code, so in general will be +1 to the actual observing night.
 
 As this is dependent on kentools and qcInvPrint, in general you will need to be at the Observer2 station.
 
@@ -43,6 +43,9 @@ Current arguments are:
 
 * --Date, --D : Set the date of the input file. Takes the form YYYY-MM-DD. Default is the current day (not observing night).
 * --show-plots : A boolean argument that can be parsed to show the two summary plots for psf and t_eff. Default is "False".
+
+
+If you would like to explore DESENAPT
 
 DESENAPT Method
 ===============
@@ -78,22 +81,4 @@ Relies upon kentools:
 For more information on the kentools package please see : https://cdcvs.fnal.gov/redmine/projects/desops/wiki/Introduction_to_kentools
 
 Kentools was created by Steve Kent.
-
-
-
-
-
-
-
-## Steps to Produce the Plots:
-It is advisable to run this only at the end of the observing time, as the code will split the time between first and last exposures into quartiles.
--Run "qcInvPrint" ing the godb environment as observer2.
--In a new terminal type "python psf_reader.py"
-
-##### Arguments
-
--"--show-plots=True" : This will show the summary plots.
--"--day=00" Will read in the .qcinv file corresponding to that day of this month.
-
-
 
