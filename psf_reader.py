@@ -14,6 +14,7 @@ import datetime
 import os
 import sys
 import warnings
+import argparse
 
 
 def get_date():
@@ -137,6 +138,15 @@ def plot_filters_time(content,year,month,day,var):
 		ax.set_xticklabels(times,rotation=90)
 		ax.xaxis.set_major_formatter(dates.DateFormatter('%H:%M'))
 		#print str(median)+ "in band {}".format(band)
+		if band=='i' and var=="psf":
+			if y==[]:
+				av=NaN
+			else:
+				av = np.average(y)
+			print '''The average i band psf::
+				Median = {} arcmin
+				Mean   = {} arcmin
+				RMS    = {} arcmin\n\n\n'''.format(median,av,get_rms_iband(y))
 	plt.xlim(xmin,xmax)
 	lgd = plt.legend(loc='center left', bbox_to_anchor=(1, 0.5),
           fancybox=True, shadow=True, ncol=1)
@@ -159,7 +169,7 @@ def quarter_plot(content,year,month,day,var):
 	headers = ["ra","dec","ut","filter","exposure_time","secz","psf","sky","cloud","t_eff"]
 	filters = ['g','r','i','z','Y']
 	colours = ['g','r','m','pink','y']
-	linestyles = ["-","--","-.",":",'-']
+	linestyles = ["-","--","-.",":","-"]
 	all_times=[]
 	for item in exp.keys():
 		try:
@@ -272,9 +282,17 @@ def get_rms_iband(_list):
 	for element in _list:
 		_sum+=((av - element)**2.)/n
 	return str(np.sqrt(_sum))
-
+def arguments():
+	parser=argparse.ArgumentParser()
+	parser.add
 def main():
+	parser=argparse.ArgumentParser()
+	args = parser.parse.args
 	year,month,day = get_date()
+	day-=1
+	for line in sys.argv:
+		if line.split("=")[0]=="--day=":
+			day=line.split("=")[1]
 	try:
 		with open("{}{}{}.qcinv".format(year,month,day)) as f:
 			content = f.readlines()
@@ -288,8 +306,10 @@ def main():
 	plot_filters_time(content,year,month,day,"psf")
 	for line in sys.argv:
 		if line=="--show-plots=True":
-			plt.show(block=False)
-			os.system('sleep 20')
+			os.system('display all-band_psf.png &')
+			os.system('display all-band_t_eff.png &')
+
+
 
 if __name__ == '__main__':
 	with warnings.catch_warnings():
