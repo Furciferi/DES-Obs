@@ -285,7 +285,7 @@ def get_rms_iband(_list):
 
 def argparser():
 	year,month,day = get_date()
-	set_date = str(year)+"-"+str(month)+"-"+str(day)
+	set_date = str(year)+"-"+str(month)+"-"+str(day-1)
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--Date","-D",help="Date of the qcinv file in the format YYYY-MM-DD",default=set_date)
 	parser.add_argument("--show-plots",type=bool , help="Display final summary plots, default is False", choices=[True,False],default=False)
