@@ -5,14 +5,14 @@ The Dark Energy Survey Night End Plotting Tool is an easy to use plotting tool t
 
 Table of Contents:
 ==================
-	*[DESNEPT](#DESNEPT)
-	*[Table of Contents](#table-of-contents)
-	*[TL:DR](#tldr)
-	*[Installation](#installation)
-	*[Usage](#usage)
-	*[DESENAPT Method](#desenapt-method)
-	*[Dependencies](#dependencies)
 
+   * [DESNEPT](#desnept)
+   * [Table of Contents:](#table-of-contents)
+   * [TL;DR](#tldr)
+   * [Installation](#installation)
+   * [Usage](#usage)
+   * [DESENAPT Method](#desenapt-method)
+   * [Dependencies](#dependencies)
 TL;DR
 =====
 
