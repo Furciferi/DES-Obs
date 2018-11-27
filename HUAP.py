@@ -371,7 +371,7 @@ def main():
 			with open("{}{}0{}.qcinv".format(year,month,day)) as f:
 				content = f.readlines()
 		else:
-			with open("{}{}0{}.qcinv".format(year,month,day)) as f:
+			with open("{}{}{}.qcinv".format(year,month,day)) as f:
 				content = f.readlines()
 	except IOError:
 		print "No file found for today, please run qcInvPrint as observer2 in godb."
