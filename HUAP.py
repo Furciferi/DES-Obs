@@ -1,6 +1,6 @@
 # Author: Reese Wilkinson
 # Email: rw264@sussex.ac.uk
-# Last Update: 2017-11-18
+# Last Update: 2018-11-26
 
 # This code has been written during observation time, and may contain errors/be inefficient.
 # Please update to your hearts content if you wish to.
@@ -29,8 +29,8 @@ def plot_each_filter_time(content,year,month,day,args):
 
 
 	headers = ["ra","dec","ut","filter","exposure_time","secz","psf","sky","cloud","t_eff"]
-	filters = ['g','r','i','z','Y']
-	colours = ['g','r','m','pink','y']
+	filters = ['u','g','r','i','z','Y']
+	colours = ['k','g','r','m','pink','y']
 	for band in filters:
 		y=[]
 		x = exp.keys()
@@ -140,7 +140,7 @@ def plot_filters_time(content,year,month,day,var,args):
 		#print str(median)+ "in band {}".format(band)
 		if band=='i' and var=="psf":
 			if y==[]:
-				av=NaN
+				av=float("nan")
 			else:
 				av = np.average(y)
 			print '''The average i band psf::
@@ -167,9 +167,9 @@ def quarter_plot(content,year,month,day,var,args):
 
 
 	headers = ["ra","dec","ut","filter","exposure_time","secz","psf","sky","cloud","t_eff"]
-	filters = ['g','r','i','z','Y']
-	colours = ['g','r','m','pink','y']
-	linestyles = ["-","--","-.",":","-"]
+	filters = ['u','g','r','i','z','Y']
+	colours = ['k','g','r','m','pink','y']
+	linestyles = [":","-","--","-.",":","-"]
 	all_times=[]
 	for item in exp.keys():
 		try:
@@ -240,7 +240,7 @@ def quarter_plot(content,year,month,day,var,args):
 				None
 			if band=='i' and var=="psf":
 				if y==[]:
-					av=NaN
+					av=float("nan")
 				else:
 					av = np.average(y)
 				print '''The i band psf for Q{}:
@@ -260,8 +260,76 @@ def quarter_plot(content,year,month,day,var,args):
 		plt.savefig("Q{}-all_band_{}.png".format(counter,var),bbox_extra_artists=(lgd,), bbox_inches='tight')
 		print
 
+def get_statistics(content,year,month,day,args):
+	exp={}
+	headers = ["ra","dec","ut","filter","exposure_time","secz","psf","sky","cloud","t_eff"]
+	filters = ['u','g','r','i','z','Y']
+	colours = ['k','g','r','m','pink','y']
 
+	for itter in range(0,len(content)):
+		line = content[itter].split()
+		if len(line)>13:
+			temp_dict={}
+			for var in range(0,len(headers)):
+				# print(line)
+				temp_dict[headers[var]]=line[var+1]
+			exp[line[0]]=temp_dict
+	# print(exp)
+	stats = {}
+	for band in filters:
+		stats[band]={}
+		for header in headers:
+			stats[band][header]=[]
+	for key in exp.keys():
+		band = exp[key]["filter"]
+		for head in exp[key].keys():
+			if head==band or band not in filters:
+				continue
+			else:
+				stats[band][head].append(exp[key][head])
+	for band in filters:
+		for head in headers:
+			if band==head or stats[band][head]==[]:
+				continue
+			else:
+				try:
+					float(stats[band][head][0])
+					stats[band][head]=np.array(stats[band][head],dtype=float)
+				except ValueError:
+					stats[band][head]=np.array(stats[band][head])
+	final = {}
+	for band in filters:
+		final[band]={}
+		teff_pro = []
+		for itter in range(len(stats[band]["t_eff"])):
+			teff_pro.append(stats[band]["t_eff"][itter]*stats[band]["exposure_time"][itter])
+		if teff_pro==[]:
+			final[band]["Sum_teff_x_Exp"]=np.nan
+			final[band]["max_t_eff"]=np.nan
+			final[band]["min_psf"]=np.nan
+		else:
+			final[band]["Sum_teff_x_Exp"]=np.sum(teff_pro)
+			final[band]["max_t_eff"]=max(stats[band]["t_eff"])
+			final[band]["min_psf"]=min(stats[band]["psf"])
+	all_psf=[]
+	all_teff=[]
+	all_product=[]
+	for band in filters:
+		for res in stats[band]['psf']:
+			all_psf.append(res)
+		for res in stats[band]['t_eff']:
+			all_teff.append(res)
+		all_product.append(final[band]["Sum_teff_x_Exp"])
 
+	for band in filters:
+		print "Band:",band
+		for key in final[band].keys():
+			print "\t{k} : {r}".format(k=key,r=final[band][key])
+	print("")
+	print "All Night averages:"
+	print "\tpsf:",np.mean(all_psf)
+	print "\tt_eff:",np.mean(all_teff)
+	print "\tSN Total:",np.nansum(all_product)
 
 def get_quartiles(list):
 	minu = min(list)
@@ -274,7 +342,7 @@ def get_quartiles(list):
 
 def get_rms_iband(_list):
 	if _list==[]:
-		av=NaN
+		av=float("nan")
 	else:
 		av = np.average(_list)
 	_sum=0
@@ -292,10 +360,12 @@ def argparser():
 	args = parser.parse_args()
 	return args
 
-
 def main():
 	args = argparser()
 	print args
+	year='2018'
+	month="11"
+	day="26"
 	print("The date used is {} in UTC. This translates to the date which qcInvPrint outputs at the end of the night.\n".format(args.Date))
 	year,month,day = map(int,(args.Date).split("-"))
 	try:
@@ -309,6 +379,7 @@ def main():
 	quarter_plot(content,year,month,day,"t_eff",args)
 	plot_filters_time(content,year,month,day,"t_eff",args)
 	plot_filters_time(content,year,month,day,"psf",args)
+	get_statistics(content,year,month,day,'')
 	if args.show_plots:
 		os.system('display all-band_psf.png &')
 		os.system('display all-band_t_eff.png &')
