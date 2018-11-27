@@ -396,6 +396,7 @@ def main():
 		for line in content:
 			if "WF" in line and "tile" in line:
 				actual.append(line)
+				print(line)
 		content=actual
 		get_statistics(content,year,month,day,'')
 	if args.show_plots:
