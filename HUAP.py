@@ -364,15 +364,15 @@ def argparser():
 
 def main():
 	args = argparser()
-	print args
-	year='2018'
-	month="11"
-	day="26"
 	print("The date used is {} in UTC. This translates to the date which qcInvPrint outputs at the end of the night.\n".format(args.Date))
-	year,month,day = map(str,(args.Date).split("-"))
+	year,month,day = map(int,(args.Date).split("-"))
 	try:
-		with open("{}{}{}.qcinv".format(year,month,day)) as f:
-			content = f.readlines()
+		if day<10:
+			with open("{}{}0{}.qcinv".format(year,month,day)) as f:
+				content = f.readlines()
+		else:
+			with open("{}{}0{}.qcinv".format(year,month,day)) as f:
+				content = f.readlines()
 	except IOError:
 		print "No file found for today, please run qcInvPrint as observer2 in godb."
 		sys.exit()
