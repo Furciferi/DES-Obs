@@ -53,7 +53,7 @@ HUAP Method
 ===============
 The program itself is currently limited to producting psf and t_eff plots against time. The information is read in from qcInvPrint file.
 
-Currently the program also breaks the night into 4 quarters based on the start and end times contained in the input file. In the future it is hoped that if can take an argument to decide how many quartiles are needed when DES only observed for half the night.This quartering is simply a partitioning of the data into 4 equal length time bands.
+Currently the program also breaks the night into 4 quarters based on the start and end times contained in the input file. In the future it is hoped that it can take an argument to decide how many quartiles are needed when DES only observed for half the night.This quartering is simply a partitioning of the data into 4 equal length time bands.
 
 The data is then manipulated to produce the following plots:
 
