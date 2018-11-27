@@ -357,8 +357,8 @@ def argparser():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--Date","-D",help="Date of the qcinv file in the format YYYY-MM-DD",default=set_date)
 	parser.add_argument("--show-plots",type=bool , help="Display final summary plots, default is False", choices=[True,False],default=False)
-	parser.add_argument("--WF_stats",type=str,help="Calculate psf,teff and SN for WF exposure for bragging rights", choices=["True","False"],default="True")
-	parser.add_argument("--All_stats",type=str,help="Calculate psf,teff and SN for all exposure for bragging rights", choices=["True","False"],default="False")
+	parser.add_argument("--WF_stats",type=str,help="Calculate psf,teff and SN for WF exposure for bragging rights", default="True")
+	parser.add_argument("--All_stats",type=str,help="Calculate psf,teff and SN for all exposure for bragging rights", default="False")
 	args = parser.parse_args()
 	return args
 
