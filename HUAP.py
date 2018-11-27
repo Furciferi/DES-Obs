@@ -369,7 +369,7 @@ def main():
 	month="11"
 	day="26"
 	print("The date used is {} in UTC. This translates to the date which qcInvPrint outputs at the end of the night.\n".format(args.Date))
-	year,month,day = map(int,(args.Date).split("-"))
+	year,month,day = map(str,(args.Date).split("-"))
 	try:
 		with open("{}{}{}.qcinv".format(year,month,day)) as f:
 			content = f.readlines()
