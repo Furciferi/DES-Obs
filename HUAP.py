@@ -375,10 +375,25 @@ def main():
 		print "No file found for today, please run qcInvPrint as observer2 in godb."
 		sys.exit()
 	content=content[1:-2]
+	actual=[]
+	for line in content:
+		if "SDSS" not in line and "C26202" not in line:
+			actual.append(line)
+	content=actual
 	quarter_plot(content,year,month,day,"psf",args)
 	quarter_plot(content,year,month,day,"t_eff",args)
 	plot_filters_time(content,year,month,day,"t_eff",args)
 	plot_filters_time(content,year,month,day,"psf",args)
+
+	print "All Stats:"
+	get_statistics(content,year,month,day,'')
+
+	print "WF Only:"
+	actual=[]
+	for line in content:
+		if "WF" in line and "tile" in line:
+			actual.append(line)
+	content=actual
 	get_statistics(content,year,month,day,'')
 	if args.show_plots:
 		os.system('display all-band_psf.png &')
