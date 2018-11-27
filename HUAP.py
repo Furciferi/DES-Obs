@@ -357,8 +357,8 @@ def argparser():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--Date","-D",help="Date of the qcinv file in the format YYYY-MM-DD",default=set_date)
 	parser.add_argument("--show-plots",type=bool , help="Display final summary plots, default is False", choices=[True,False],default=False)
-	parser.add_argument("--WF_stats",type=bool,help="Calculate psf,teff and SN for WF exposure for bragging rights", choices=[True,False],default=True)
-	parser.add_argument("--All_stats",type=bool,help="Calculate psf,teff and SN for all exposure for bragging rights", choices=[True,False],default=False)
+	parser.add_argument("--WF_stats",type=bool,help="Calculate psf,teff and SN for WF exposure for bragging rights", choices=["True","False"],default="True")
+	parser.add_argument("--All_stats",type=bool,help="Calculate psf,teff and SN for all exposure for bragging rights", choices=["True","False"],default="False")
 	args = parser.parse_args()
 	return args
 
@@ -387,10 +387,10 @@ def main():
 	plot_filters_time(content,year,month,day,"t_eff",args)
 	plot_filters_time(content,year,month,day,"psf",args)
 
-	if args.All_stats:
+	if args.All_stats=="True":
 		print "All Stats:"
 		get_statistics(content,year,month,day,'')
-	if args.WF_stats:
+	if args.WF_stats=="True":
 		print "WF Only Statistics:"
 		actual=[]
 		for line in content:
