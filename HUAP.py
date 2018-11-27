@@ -357,6 +357,8 @@ def argparser():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--Date","-D",help="Date of the qcinv file in the format YYYY-MM-DD",default=set_date)
 	parser.add_argument("--show-plots",type=bool , help="Display final summary plots, default is False", choices=[True,False],default=False)
+	parser.add_argument("--WF_stats",type=bool,help="Calculate psf,teff and SN for WF exposure for bragging rights", choices=[True,False],default=True)
+	parser.add_argument("--All_stats",type=bool,help="Calculate psf,teff and SN for all exposure for bragging rights", choices=[True,False],default=False)
 	args = parser.parse_args()
 	return args
 
@@ -385,16 +387,17 @@ def main():
 	plot_filters_time(content,year,month,day,"t_eff",args)
 	plot_filters_time(content,year,month,day,"psf",args)
 
-	print "All Stats:"
-	get_statistics(content,year,month,day,'')
-
-	print "WF Only:"
-	actual=[]
-	for line in content:
-		if "WF" in line and "tile" in line:
-			actual.append(line)
-	content=actual
-	get_statistics(content,year,month,day,'')
+	if args.All_stats:
+		print "All Stats:"
+		get_statistics(content,year,month,day,'')
+	if args.WF_stats:
+		print "WF Only Statistics:"
+		actual=[]
+		for line in content:
+			if "WF" in line and "tile" in line:
+				actual.append(line)
+		content=actual
+		get_statistics(content,year,month,day,'')
 	if args.show_plots:
 		os.system('display all-band_psf.png &')
 		os.system('display all-band_t_eff.png &')
